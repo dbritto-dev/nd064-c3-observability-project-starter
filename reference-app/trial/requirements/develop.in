@@ -1,0 +1,6 @@
+-r common.in
+
+flake8
+pylint
+pytest
+black
