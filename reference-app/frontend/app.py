@@ -1,11 +1,23 @@
-from flask import Flask, render_template, request
+# Built-in packages
 
-app = Flask(__name__)
+# Third-party packages
+from flask import Flask
 
-@app.route('/')
-def homepage():
-    return render_template("main.html")
+# Local packages
+
+
+def create_app() -> Flask:
+    app = Flask(__name__)
+
+    from tracing import register_tracing
+    from controller import register_controllers
+
+    register_tracing(app)
+    register_controllers(app)
+
+    return app
 
 
 if __name__ == "__main__":
-    app.run()
+    app = create_app()
+    app.run(port=8080)
