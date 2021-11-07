@@ -1,19 +1,14 @@
-# Use the official Python image.
-# https://hub.docker.com/_/python
-FROM python:3.7-slim
+FROM python:3.9-slim-buster as builder
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+WORKDIR /app
+COPY requirements.txt ./
+RUN python -m pip install --upgrade pip && python -m pip install --user -r requirements.txt
 
-# Copy local code to the container image.
-ENV APP_HOME /app
-WORKDIR $APP_HOME
-COPY . ./
-
-ARG PROJECT_ID
-ENV PROJECT_ID ${PROJECT_ID}
-
-
-# Install production dependencies.
-RUN apt-get update && \
-    pip install --upgrade pip && \
-    pip install -r requirements.txt
-
-CMD ["gunicorn", "--access-logfile", "-", "--error-logfile", "-", "-w", "4", "-b", "0.0.0.0:8080", "app:app"]
+FROM python:3.9-slim-buster
+WORKDIR /app
+COPY --from=builder /root/.local /root/.local
+COPY . .
+ENV PATH=/root/.local:$PATH
+EXPOSE 8080
+CMD ["python", "run.py"]
