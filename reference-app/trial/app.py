@@ -9,11 +9,11 @@ from flask import Flask
 def create_app() -> Flask:
     app = Flask(__name__)
 
-    from tracing import register_instrumentors
-    from controller import register_routes
+    from tracing import register_tracing
+    from controller import register_controllers
 
-    register_instrumentors(app)
-    register_routes(app)
+    register_tracing(app)
+    register_controllers(app)
 
     return app
 
