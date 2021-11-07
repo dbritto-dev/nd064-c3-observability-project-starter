@@ -16,6 +16,8 @@ from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 
 # Local packages
 
+RESOURCE_SERVICE_NAME = "trial-service"
+
 
 def get_span_exporter(app: Flask) -> SpanExporter:
     return ConsoleSpanExporter() if app.debug else JaegerExporter()
@@ -24,7 +26,7 @@ def get_span_exporter(app: Flask) -> SpanExporter:
 def register_tracing(app: Flask) -> None:
     trace.set_tracer_provider(
         TracerProvider(
-            resource=Resource({SERVICE_NAME: "trial-service"}),
+            resource=Resource({SERVICE_NAME: RESOURCE_SERVICE_NAME}),
             active_span_processor=BatchSpanProcessor(get_span_exporter(app)),
         )
     )
