@@ -3,3 +3,4 @@ requests
 jaeger-client 
 prometheus-client
 flask-opentracing
+prometheus-flask-exporter
