@@ -9,10 +9,10 @@ from flask import Flask
 def create_app() -> Flask:
     app = Flask(__name__)
 
-    from tracing import register_tracing
+    from telemetry import register_telemetry
     from controller import register_controllers
 
-    register_tracing(app)
+    register_telemetry(app)
     register_controllers(app)
 
     return app
