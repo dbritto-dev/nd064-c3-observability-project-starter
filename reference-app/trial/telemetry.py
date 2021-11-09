@@ -7,15 +7,9 @@ from flask_opentracing import FlaskTracing
 from flask_opentracing.tracing import opentracing
 from jaeger_client.config import Config as JaegerClientConfig
 from jaeger_client.metrics.prometheus import PrometheusMetricsFactory
-from prometheus_client.exposition import make_wsgi_app
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from prometheus_flask_exporter import PrometheusMetrics as FlaskMetrics
 
 # Local packages
-
-
-class FlaskMetrics:
-    def __init__(self, app: Flask = None) -> None:
-        app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": make_wsgi_app()})
 
 
 def get_opentracing_tracer(service) -> opentracing.Tracer:
