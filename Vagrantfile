@@ -30,7 +30,11 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 16686, host: 8088
 
-  for p in [3000, 3030, 8080, 8081, 8082, 8083, 8888, 9090]
+  for p in 8080..8090
+    config.vm.network "forwarded_port", guest: p, host: p
+  end
+
+  for p in [3000, 3030, 8888, 9090, 9091]
     config.vm.network "forwarded_port", guest: p, host: p
   end
 
