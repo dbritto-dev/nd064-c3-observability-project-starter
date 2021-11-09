@@ -34,7 +34,7 @@ kubectl port-forward -n monitoring svc/prometheus-grafana --address 0.0.0.0 3000
 
 ```sh
 kubectl port-forward -n monitoring svc/prometheus-grafana --address 0.0.0.0 3000:80
-kubectl port-forward -n observability svc/simplest-query --address 0.0.0.0 9000:16686
+kubectl port-forward -n observability svc/simplest-query --address 0.0.0.0 3030:16686
 ```
 
 **Answer image:**
@@ -84,17 +84,15 @@ Indicator (SLI) is a measurement like `The average time taken to return a reques
 TROUBLE TICKET
 
 Name: add_star endpoint doesn't work properly returning a 500 http status code
-
 Date: 2021/09/11
-
 Subject: MongoDB unreachable
-
 Affected Area: add_star (POST /star) endpoint in backend app
-
 Severity: ERROR
-
 Description: Backend app cannot connect to MongoDB
 
+**Answer image:**
+
+![Jaeger Tracing Backend Add Star Span](answer-img/jaeger-tracing-backend-add-star-span.png)
 
 ## Creating SLIs and SLOs
 *TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name three SLIs that you would use to measure the success of this SLO.
@@ -110,29 +108,22 @@ Description: Backend app cannot connect to MongoDB
 
 **Uptime**
 
+I chose these metrics because I want to know what services are available for customers
+
 - backend service uptime
 - frontend service uptime
 - trial service uptime
 
 **Latency**
 
+I chose these metrics because I want to know what's the time the customer needs to way to get a response
+
 - average of response time 
 - median response time
 
-**Responsive**
-
-- average of requests by minute
-- average of requests by hour
-- number of success requests/response per minute
-- number of success requests/response per 30 sec
-
-**Error**
-
-- average of errors per service
-- average of errors per service in a minute
-- average of errors per service in 30 sec
-
 **Resource usage**
+
+I chose these metrics because I want to know what's the resource consumption of each service
 
 - Memory usage
 - CPU usage
