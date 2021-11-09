@@ -17,6 +17,7 @@ flask==2
     #   -r requirements\common.in
     #   flask-opentracing
     #   flask-pymongo
+    #   prometheus-flask-exporter
 flask-opentracing==1.1.0
     # via -r requirements\common.in
 flask-pymongo==2.3.0
@@ -36,6 +37,10 @@ opentracing==2.4.0
     #   flask-opentracing
     #   jaeger-client
 prometheus-client==0.12.0
+    # via
+    #   -r requirements\common.in
+    #   prometheus-flask-exporter
+prometheus-flask-exporter==0.18.5
     # via -r requirements\common.in
 pymongo==3.12.1
     # via
